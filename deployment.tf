@@ -234,11 +234,11 @@ resource "kubernetes_deployment" "container" {
             command = lookup(local.command, container.key, [])
 
             resources {
-              limits {
+              limits = {
                 cpu    = lookup(lookup(local.resources_limits, container.key, {}), "cpu", "0.2")
                 memory = lookup(lookup(local.resources_limits, container.key, {}), "memory", "256Mi")
               }
-              requests {
+              requests = {
                 cpu    = lookup(lookup(local.resources_requests, container.key, {}), "cpu", "0.1")
                 memory = lookup(lookup(local.resources_requests, container.key, {}), "memory", "128Mi")
               }
